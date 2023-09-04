@@ -36,7 +36,7 @@ const Header = () => {
                     alt="FlowBite Logo"
                   />
                   <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                    Flowbite
+                    Shopping Cart
                   </span>
                 </a>
               </div>
