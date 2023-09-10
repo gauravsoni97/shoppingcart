@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { useProductsContext } from "../../context/ProductsContext";
 
 const HighLowPrice = () => {
+  const { setFilteredProducts, products } = useProductsContext();
+
+  const [checkedLowToHigh, setCheckedLowToHigh] = useState(false);
+  const [checkedHighToLow, setCheckedHighToLow] = useState(false);
+
+  const handleLowToHigh = () => {
+    setCheckedLowToHigh(true);
+    setCheckedHighToLow(false);
+
+    const lowToHighSort = [...products].sort((a, b) => a.price - b.price);
+    setFilteredProducts(lowToHighSort);
+  };
+
+  const handleHighToLow = () => {
+    setCheckedLowToHigh(false);
+    setCheckedHighToLow(true);
+
+    const highToLowSort = [...products].sort((a, b) => b.price - a.price);
+    setFilteredProducts(highToLowSort);
+  };
+
   return (
     <li className="mb-4 border-2 border-gray-700 border-dashed rounded-lg py-3 px-4">
       <p className="text-sm font-medium text-gray-900 dark:text-gray-300 mb-3">
@@ -8,11 +30,12 @@ const HighLowPrice = () => {
       </p>
       <div className="flex items-center mb-4">
         <input
+          checked={checkedLowToHigh}
           id="default-radio-1"
           type="radio"
-          value=""
           name="default-radio"
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          onChange={handleLowToHigh}
         />
         <label
           htmlFor="default-radio-1"
@@ -23,11 +46,12 @@ const HighLowPrice = () => {
       </div>
       <div className="flex items-center">
         <input
+          checked={checkedHighToLow}
           id="default-radio-2"
           type="radio"
-          value=""
           name="default-radio"
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          onChange={handleHighToLow}
         />
         <label
           htmlFor="default-radio-2"
