@@ -5,8 +5,9 @@ export const ProductsListCtx = createContext();
 
 // Custom context provider component
 const ProductsProvider = ({ children }) => {
-
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -30,6 +31,8 @@ const ProductsProvider = ({ children }) => {
   }, []);
 
   const ctxValue = {
+    filteredProducts,
+    setFilteredProducts,
     products,
     loading,
     error,

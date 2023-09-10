@@ -1,10 +1,8 @@
 import React from "react";
 import HighLowPrice from "./HighLowPrice";
-import InStockPrice from "./InStockPrice";
 import PriceRange from "./PriceRange";
 import Ratings from "./Rating/Ratings";
 import ClearAllFilters from "./ClearAllFilters";
-import CategoryFilter from "./CategoryFilter";
 
 const Filters = () => {
   return (
@@ -19,7 +17,6 @@ const Filters = () => {
 
           <ul className="font-medium">
             <HighLowPrice />
-            <InStockPrice />
             <PriceRange />
             <Ratings />
 
