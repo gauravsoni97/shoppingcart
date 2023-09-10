@@ -15,7 +15,7 @@ const Filters = () => {
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-          <h4 class="text-xl font-bold dark:text-white mb-3 mt-1">Filters</h4>
+          <h4 className="text-xl font-bold dark:text-white mb-3 mt-1">Filters</h4>
 
           <ul className="font-medium">
             <HighLowPrice />
