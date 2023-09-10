@@ -3,7 +3,7 @@ import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const StarRatingUi = ({ StarRatingValue }) => {
   return (
-    <div className="flex items-center mb-4">
+    <div className="flex items-center mb-2">
       <input
         id="default-checkbox"
         type="checkbox"
