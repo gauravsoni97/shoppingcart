@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useProductsContext } from "../../context/ProductsContext";
 
 const HighLowPrice = () => {
-  const { setFilteredProducts, products } = useProductsContext();
+  const { clearAllFilters, setClearAllFilters, setFilteredProducts, products } =
+    useProductsContext();
 
   const [checkedLowToHigh, setCheckedLowToHigh] = useState(false);
   const [checkedHighToLow, setCheckedHighToLow] = useState(false);
 
   const handleLowToHigh = () => {
+    setClearAllFilters(false);
     setCheckedLowToHigh(true);
     setCheckedHighToLow(false);
 
@@ -16,12 +18,21 @@ const HighLowPrice = () => {
   };
 
   const handleHighToLow = () => {
+    setClearAllFilters(false);
     setCheckedLowToHigh(false);
     setCheckedHighToLow(true);
 
     const highToLowSort = [...products].sort((a, b) => b.price - a.price);
     setFilteredProducts(highToLowSort);
   };
+
+  useEffect(() => {
+    if (clearAllFilters) {
+      setCheckedLowToHigh(false);
+      setCheckedHighToLow(false);
+      setFilteredProducts(products);
+    }
+  }, [clearAllFilters]);
 
   return (
     <li className="mb-4 border-2 border-gray-700 border-dashed rounded-lg py-3 px-4">

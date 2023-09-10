@@ -7,6 +7,7 @@ export const ProductsListCtx = createContext();
 const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [clearAllFilters, setClearAllFilters] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,6 +30,10 @@ const ProductsProvider = ({ children }) => {
 
     fetchProducts();
   }, []);
+  useEffect(() => {
+    setClearAllFilters(clearAllFilters);
+    console.log("clearAllFilters", clearAllFilters);
+  }, [clearAllFilters]);
 
   const ctxValue = {
     filteredProducts,
@@ -36,6 +41,8 @@ const ProductsProvider = ({ children }) => {
     products,
     loading,
     error,
+    clearAllFilters,
+    setClearAllFilters,
   };
 
   // Return the context provider with the value prop
