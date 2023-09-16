@@ -1,17 +1,18 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Cart from "./components/Cart/Cart";
+import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
-import Filters from "./components/Filters/Filters";
-import AllProducts from "./components/Products/AllProducts";
 
 const App = () => {
   return (
-    <div>
-      <>
-        <Header />
-        <Filters />
-        <AllProducts />
-      </>
-    </div>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+    </>
   );
 };
 
