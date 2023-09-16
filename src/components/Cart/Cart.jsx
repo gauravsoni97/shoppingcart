@@ -26,8 +26,6 @@ const Cart = () => {
       price: 789,
       count: 1,
     },
-   
-  
   ]);
 
   const increaseQuantity = (id) => {
