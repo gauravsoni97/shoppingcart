@@ -8,14 +8,20 @@ function valuetext(value) {
 }
 
 const PriceRange = () => {
-  const { setFilteredProducts, products } = useProductsContext();
+  const {  clearAllFilters, setClearAllFilters, setFilteredProducts, products } = useProductsContext();
 
-  const [value, setValue] = useState([20, 100]);
+  const [value, setValue] = useState([20, 800]);
   console.log("price range value", value[0], value[1]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setClearAllFilters(false)
   };
+
+
+  const showAllPriceProduct =()=>{
+    setClearAllFilters(true);
+  }
 
   useEffect(() => {
     const updatedList = products.filter((product) => {
@@ -24,6 +30,12 @@ const PriceRange = () => {
     });
     setFilteredProducts(updatedList);
   }, [value, products]);
+
+  useEffect(() => {
+    if (clearAllFilters) {
+      setValue([0, 1000])
+    }
+  }, [clearAllFilters]);
   
 
   return (
@@ -51,6 +63,11 @@ const PriceRange = () => {
             Max: {value[1]}
           </h3>
         </div>
+
+        <button onClick={showAllPriceProduct} type="button" class=" w-full text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 mt-2">Show All</button>
+
+
+        
       </Box>
     </li>
   );
