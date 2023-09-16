@@ -1,17 +1,30 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import { useProductsContext } from "../../context/ProductsContext";
 
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value}`;
 }
 
 const PriceRange = () => {
-  const [value, setValue] = React.useState([20, 37]);
+  const { setFilteredProducts, products } = useProductsContext();
+
+  const [value, setValue] = useState([20, 100]);
+  console.log("price range value", value[0], value[1]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    const updatedList = products.filter((product) => {
+      const price = product.price; // Assuming each product has a "price" property
+      return price >= value[0] && price <= value[1];
+    });
+    setFilteredProducts(updatedList);
+  }, [value, products]);
+  
 
   return (
     <li className="mb-4 border-2 border-gray-700 border-dashed rounded-lg py-3 px-4">
@@ -25,13 +38,17 @@ const PriceRange = () => {
           onChange={handleChange}
           valueLabelDisplay="auto"
           getAriaValueText={valuetext}
+          step={10}
+          marks
+          min={10}
+          max={1000}
         />
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-medium text-gray-900 dark:text-gray-300 mt-2">
-            Min: 322
+            Min: {value[0]}
           </h3>
           <h3 className="text-sm font-medium text-gray-900 dark:text-gray-300 mt-2">
-            Max: 322
+            Max: {value[1]}
           </h3>
         </div>
       </Box>

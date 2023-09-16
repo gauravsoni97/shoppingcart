@@ -37,7 +37,7 @@ const HighLowPrice = () => {
   return (
     <li className="mb-4 border-2 border-gray-700 border-dashed rounded-lg py-3 px-4">
       <p className="text-sm font-medium text-gray-900 dark:text-gray-300 mb-3">
-        Sort By
+        Sort By Price
       </p>
       <div className="flex items-center mb-4">
         <input
