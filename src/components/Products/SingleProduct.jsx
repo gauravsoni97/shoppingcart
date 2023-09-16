@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCartContext } from "../../context/CartContext";
 
 const SingleProduct = ({ product }) => {
   const { id, images, title, description, rating, price } = product;
 
-  const { addToCartItem } = useCartContext();
+  const { addtoCartList, addToCartItem, removeCartItem } = useCartContext();
+
+  const isInList = addtoCartList.some((item) => item[0].id === id);
 
   return (
     <div>
@@ -31,13 +33,23 @@ const SingleProduct = ({ product }) => {
               ${price}
             </span>
 
-            <button
-              onClick={() => addToCartItem(id)}
-              type="button"
-              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              Add to Cart
-            </button>
+            {isInList ? (
+              <button
+                onClick={() => removeCartItem(id)}
+                type="button"
+                class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Remove From Cart
+              </button>
+            ) : (
+              <button
+                onClick={() => addToCartItem(id)}
+                type="button"
+                className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Add to Cart
+              </button>
+            )}
           </div>
         </div>
       </div>

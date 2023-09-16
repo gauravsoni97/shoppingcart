@@ -6,6 +6,7 @@ export const CartCtx = createContext();
 const CartContext = ({ children }) => {
   const [addtoCartList, setaddtoCartList] = useState([]);
 
+
   const { products } = useProductsContext();
 
   const addToCartItem = (id) => {
@@ -16,9 +17,16 @@ const CartContext = ({ children }) => {
     setaddtoCartList([...addtoCartList, AddThisItem]);
   };
 
+  const removeCartItem = (id) => {
+    // Use filter to remove the item with the matching id
+    const updatedCartList = addtoCartList.filter((item) => item[0].id !== id);
+    setaddtoCartList(updatedCartList);
+  };
+  
+  
   console.log("addtoCartList", addtoCartList);
 
-  const ctxValues = { addToCartItem };
+  const ctxValues = { addtoCartList, addToCartItem, removeCartItem };
 
   return <CartCtx.Provider value={ctxValues}>{children}</CartCtx.Provider>;
 };
