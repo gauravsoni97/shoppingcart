@@ -33,7 +33,7 @@ const PriceRange = () => {
 
   useEffect(() => {
     if (clearAllFilters) {
-      setValue([0, 1000])
+      setValue([0, 5000])
     }
   }, [clearAllFilters]);
   
@@ -53,7 +53,7 @@ const PriceRange = () => {
           step={10}
           marks
           min={10}
-          max={1000}
+          max={5000}
         />
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-medium text-gray-900 dark:text-gray-300 mt-2">
@@ -64,7 +64,7 @@ const PriceRange = () => {
           </h3>
         </div>
 
-        <button onClick={showAllPriceProduct} type="button" class=" w-full text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 mt-2">Show All</button>
+        <button onClick={showAllPriceProduct} type="button" className=" w-full text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 mt-2">Show All</button>
 
 
         

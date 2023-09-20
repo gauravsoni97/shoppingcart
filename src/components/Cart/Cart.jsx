@@ -2,31 +2,14 @@ import React, { useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { useCartContext } from "../../context/CartContext";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      title: "Item 1",
-      desc: "Description for Item 1",
-      price: 123,
-      count: 1,
-    },
-    {
-      id: 2,
-      title: "Item 2",
-      desc: "Description for Item 2",
-      price: 456,
-      count: 1,
-    },
-    {
-      id: 3,
-      title: "Item 3",
-      desc: "Description for Item 3",
-      price: 789,
-      count: 1,
-    },
-  ]);
+  const { addtoCartList } = useCartContext();
+
+  const [cartItems, setCartItems] = useState(addtoCartList);
+
+  console.log("cartItems", cartItems);
 
   const increaseQuantity = (id) => {
     const updatedCart = cartItems.map((item) => {
@@ -71,16 +54,15 @@ const Cart = () => {
             role="list"
             className="divide-y divide-gray-200 dark:divide-gray-700"
           >
-            {cartItems.length === 0 && <p> Cart is empty ... </p>}
             {cartItems?.map((item) => {
-              const { id, title, desc, price, count } = item;
+              const { id, title, description, price, image } = item;
               return (
-                <li className="py-3 sm:py-4" key={id}>
+                <li className="py-3 sm:py-4">
                   <div className="flex items-center justify-between space-x-4">
                     <div className="flex items-center gap-6">
                       <img
                         className="w-8 h-8 rounded-full"
-                        src="/docs/images/people/profile-picture-1.jpg"
+                        src={image}
                         alt="Neil image"
                       />
                       <div>
@@ -88,12 +70,12 @@ const Cart = () => {
                           {title}
                         </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          {desc}
+                          {description}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 justify-center">
-                      <CloseRoundedIcon style={{ fontSize: "1rem" }} /> {count}
+                      <CloseRoundedIcon style={{ fontSize: "1rem" }} />1 
                       <button
                         onClick={() => increaseQuantity(id)}
                         className="font-bold flex items-center justify-center bg-gray-700 w-8 h-6 rounded-md"
