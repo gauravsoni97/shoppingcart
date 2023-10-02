@@ -3,19 +3,20 @@ import { useCartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 
 const SingleProduct = ({ product }) => {
-  const { id, images, title, description, rating, price } = product;
+  const { id, images, title, description, rating, price, thumbnail} = product;
 
   const { addtoCartList, addToCartItem, removeCartItem } = useCartContext();
 
   const isInList = addtoCartList.some((item) => item[0].id === id);
 
+  console.log(product);
   return (
     <div>
       <Link to={`/product/${product.id}`}>
         <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <img
             className="p-8 rounded-lg h-72 w-96 object-cover"
-            src={images[0]}
+            src={thumbnail}
             alt="product image"
           />
           <div className="px-5 pb-5">
